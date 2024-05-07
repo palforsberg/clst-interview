@@ -83,8 +83,8 @@ code.
     * Example:
         - Position 1 has UP -15 and DOWN 10
         - Position 2 has UP 20 and DOWN -20
-        - Total UP is 5 and total DOWN is 10
-        - Market risk is 10
+        - Total UP is 5 and total DOWN is -10
+        - Market risk is 5
 
 **Remember to write tests for this feature!**
 
