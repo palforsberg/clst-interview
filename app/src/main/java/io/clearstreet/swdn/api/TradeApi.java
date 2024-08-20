@@ -9,7 +9,6 @@ public interface TradeApi {
    * <ul>
    *   <li>For NEW trades, tradeId must not already exist</li>
    *   <li>For CANCEL trades, tradeId must exist and not already be cancelled</li>
-   *   <li>Multiple CANCEL trades for the same tradeId are allowed </li>
    *   <li>For REPLACE trades, tradeId must exist and not be cancelled</li>
    *   <li>Multiple REPLACE trades for the same tradeId are allowed </li>
    * </ul>
