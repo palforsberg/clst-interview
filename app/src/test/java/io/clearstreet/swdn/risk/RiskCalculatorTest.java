@@ -5,6 +5,8 @@ import static io.clearstreet.swdn.Fixtures.JP_MORGAN;
 import static io.clearstreet.swdn.Fixtures.JP_MORGAN_ACCOUNT_1;
 import static io.clearstreet.swdn.Fixtures.JP_MORGAN_POSITION_1;
 import static io.clearstreet.swdn.Fixtures.JP_MORGAN_POSITION_2;
+import static io.clearstreet.swdn.Fixtures.JP_MORGAN_POSITION_3;
+import static io.clearstreet.swdn.Fixtures.TSLA_STOCK;
 
 import io.clearstreet.swdn.position.PositionManager;
 import io.clearstreet.swdn.price.PriceRepository;
@@ -54,8 +56,10 @@ class RiskCalculatorTest {
     RiskCalculator riskCalculator = new RiskCalculator(positionManager, priceRepository,
         referenceDataRepository);
     Mockito.when(positionManager.getPositionsForMember(JP_MORGAN.memberName()))
-        .thenReturn(List.of(JP_MORGAN_POSITION_1, JP_MORGAN_POSITION_2));
+        .thenReturn(List.of(JP_MORGAN_POSITION_1, JP_MORGAN_POSITION_3));
     Mockito.when(priceRepository.getPrice(IBM_STOCK.instrumentName()))
+        .thenReturn(Optional.of(100.0));
+    Mockito.when(priceRepository.getPrice(TSLA_STOCK.instrumentName()))
         .thenReturn(Optional.of(100.0));
 
     // When
