@@ -13,6 +13,8 @@ import io.clearstreet.swdn.price.PriceRepository;
 import io.clearstreet.swdn.refdata.ReferenceDataRepository;
 import io.clearstreet.swdn.risk.RiskCalculator;
 
+import java.io.IOException;
+
 public class App {
 
   private final ReferenceDataRepository referenceDataRepository = new ReferenceDataRepository();
@@ -22,7 +24,9 @@ public class App {
       priceRepository, referenceDataRepository);
 
   public App() {
+    recoverState();
     start();
+    registerShutdownHook();
   }
 
   private void start() {
@@ -47,6 +51,28 @@ public class App {
 
   public PriceApi getPriceApi() {
     return priceRepository;
+  }
+
+  private void recoverState() {
+    try {
+      positionManager.loadState();
+      priceRepository.loadState();
+      System.out.println("Recovered number of trades: "+ positionManager.getTradesSize());
+    } catch (Exception e) {
+      System.out.println("No previous state found, starting fresh.");
+    }
+  }
+
+  private void registerShutdownHook() {
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+      try {
+        positionManager.saveState();
+        priceRepository.saveState();
+        System.out.println("Trades saved successfully on shutdown.");
+      } catch (IOException e) {
+        System.out.println("Error while saving Trades during shutdown");
+      }
+    }));
   }
 
 }

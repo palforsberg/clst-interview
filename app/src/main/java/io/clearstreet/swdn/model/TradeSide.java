@@ -1,6 +1,8 @@
 package io.clearstreet.swdn.model;
 
-public enum TradeSide {
+import java.io.Serializable;
+
+public enum TradeSide implements Serializable {
   BUY,
   SELL
 }
