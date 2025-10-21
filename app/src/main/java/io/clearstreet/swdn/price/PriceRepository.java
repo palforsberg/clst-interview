@@ -2,11 +2,9 @@ package io.clearstreet.swdn.price;
 
 import io.clearstreet.swdn.api.PriceApi;
 import io.clearstreet.swdn.model.Price;
-import io.clearstreet.swdn.model.Trade;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -32,7 +30,7 @@ public class PriceRepository implements PriceApi {
   }
 
   public void saveState() throws IOException {
-    File file = new File("recovery/price_repo.ser"); // relative to CWD
+    File file = new File("recovery/price_repo.ser");
 
     File parentDir = file.getParentFile();
     if (!parentDir.exists() && !parentDir.mkdirs()) {

@@ -85,7 +85,6 @@ class AppTest {
         .getPositionsForMember(JP_MORGAN.memberName());
 
     // Then
-    //TODO: once i fixed the recovery, the accountPNL here kept increasing. So i am maintaining the state too strictly.
     Assertions.assertEquals(150.0, accountPnl, DELTA);
     Assertions.assertEquals(1, positions.size());
     Assertions.assertEquals(100.0, positions.get(0).quantity(), DELTA);

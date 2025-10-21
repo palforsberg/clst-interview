@@ -22,7 +22,7 @@ public class PositionManager implements TradeApi, PositionApi {
   }
 
   public void saveState() throws IOException {
-    File file = new File("recovery/position_manager.ser"); // relative to CWD
+    File file = new File("recovery/position_manager.ser");
 
     File parentDir = file.getParentFile();
     if (!parentDir.exists() && !parentDir.mkdirs()) {
@@ -61,9 +61,10 @@ public class PositionManager implements TradeApi, PositionApi {
       switch (trade.tradeType()) {
           case NEW -> {
               //update trade cache
-              trades.putIfAbsent(trade.tradeId(), trade);
-              //update tradesByAccount
-              tradesByAccount.computeIfAbsent(trade.accountName(), k -> new ArrayList<>()).add(trade);
+              if (trades.putIfAbsent(trade.tradeId(), trade) == null) {
+                  //update tradesByAccount
+                  tradesByAccount.computeIfAbsent(trade.accountName(), k -> new ArrayList<>()).add(trade);
+              }
           }
           case REPLACE -> {
               //update trade cache
