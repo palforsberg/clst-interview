@@ -5,6 +5,7 @@ import io.clearstreet.swdn.model.Account;
 import io.clearstreet.swdn.model.Instrument;
 import io.clearstreet.swdn.model.Member;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,5 +43,11 @@ public class ReferenceDataRepository implements ReferenceDataApi {
 
   public Optional<Member> getMember(String memberName) {
     return Optional.ofNullable(members.get(memberName));
+  }
+
+  public List<Account> getAccountsForMember(String memberName) {
+    return accounts.values().stream()
+            .filter(account -> account.memberName().equals(memberName))
+            .toList();
   }
 }

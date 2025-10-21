@@ -1,6 +1,8 @@
 package io.clearstreet.swdn.model;
 
-public enum TradeType {
+import java.io.Serializable;
+
+public enum TradeType implements Serializable {
   NEW,
   CANCEL,
   REPLACE

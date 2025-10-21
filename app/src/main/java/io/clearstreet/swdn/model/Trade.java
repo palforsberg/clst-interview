@@ -1,5 +1,7 @@
 package io.clearstreet.swdn.model;
 
+import java.io.Serializable;
+
 /**
  * A trade is associated with an account and an instrument, which can be either a buy or a sell. The
  * unique identifier for a trade is the tradeId.
@@ -14,6 +16,6 @@ package io.clearstreet.swdn.model;
  * @param price          the price of the trade
  */
 public record Trade(String tradeId, String accountName, String instrumentName, double quantity,
-                    TradeSide side, TradeType tradeType, double price) {
+                    TradeSide side, TradeType tradeType, double price) implements Serializable {
 
 }
